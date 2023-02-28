@@ -24,7 +24,7 @@ def registerWorker(request):
             registered=True
     else:
         var_workerForm=workerForm()
-    return render(request,'dashboard/registerWorker.html',{'var_studentForm':var_workerForm,'registered':registered})
+    return render(request,'dashboard/registerWorker.html',{'var_workerForm':var_workerForm,'registered':registered})
 
 
 def registerManager(request):
@@ -50,9 +50,9 @@ def userLogin(request):
             login(request, user)
             type_obj = User_type.objects.get(user=user)
             if user.is_authenticated and type_obj.is_worker:
-                return redirect('workertDash') #Go to student home
+                return redirect('workertDash') #Go to worker home
             elif user.is_authenticated and type_obj.is_manager:
-                return redirect('managerDash') #Go to teacher home
+                return redirect('managerDash') #Go to manager home
         else:
             # Invalid email or password. Handle as you wish
             return HttpResponse('<h1>Page was found</h1>')
